@@ -36,10 +36,13 @@ class App {
       })
     ]
 
+    this.domEditor = document.getElementById('editor')
+
     async.each(this.editableLayers, (el, done) => {
       el.load((err) => {
         if (err) { return done(err) }
         el.addTo(this.map)
+        this.domEditor.appendChild(el.dom)
         done()
       })
     }, (err) => {
