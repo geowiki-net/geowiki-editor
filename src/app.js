@@ -20,6 +20,7 @@ class App {
   initMap () {
     // Create Leaflet map object
     this.map = L.map('map').setView([ 47.0835225, 15.4600919 ], 18)
+    global.map = this.map
 
     // Show OSM map background
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
