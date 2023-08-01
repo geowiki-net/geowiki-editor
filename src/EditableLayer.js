@@ -7,9 +7,23 @@ class EditableLayer {
     this.options = options
 
     this.dom = document.createElement('div')
+    this.dom.className = 'EditableLayer'
+
+    this.form = document.createElement('form')
+    this.dom.appendChild(this.form)
+    this.form.onsubmit = () => {
+      this.applyStyle(this.domStyle.value)
+      return false
+    }
+
     this.domStyle = document.createElement('textarea')
-    this.domStyle.onchange = () => this.applyStyle(this.domStyle.value)
-    this.dom.appendChild(this.domStyle)
+    this.domStyle.className = 'style'
+    this.form.appendChild(this.domStyle)
+
+    const submitApply = document.createElement('input')
+    submitApply.type = 'submit'
+    submitApply.value = 'Apply'
+    this.form.appendChild(submitApply)
   }
 
   load (callback) {

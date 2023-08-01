@@ -1,6 +1,14 @@
 #map { position: absolute; left: 0; right: 250px; top: 0; bottom: 0; border-right: 1px solid black; box-sizing: border-box; }
 #editor { position: absolute; width: 250px; top: 0; bottom: 0; right: 0; }
-#editor > div > textarea {
+
+.EditableLayer {
+  border: 1px solid black;
+  border-radius: 0.25em;
+  padding: 0.25em;
+}
+.EditableLayer > form > textarea.style {
   width: 100%;
+  height: 5em;
+  resize: vertical;
   box-sizing: border-box;
 }
