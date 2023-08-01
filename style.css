@@ -1,0 +1,2 @@
+#map { position: absolute; left: 0; right: 0; top: 0; bottom: 0 }
+#info { position: absolute; max-width: 10em; left: 1em; bottom: 1em; z-index: 1000; background: white; }

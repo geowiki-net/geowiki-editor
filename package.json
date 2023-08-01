@@ -3,6 +3,11 @@
   "version": "0.0.0",
   "description": "Web-Application which allows editing map data and style for geowiki applications",
   "scripts": {
+    "build": "browserify -g browserify-css src/app.js -p esmify -o dist/app.js",
+    "build-translations": "build_dist_node",
+    "prepare": "npm run build && npm run build-translations",
+    "lint": "standard --fix src/*.js",
+    "watch": "watchify -g browserify-css --debug src/app.js -p esmify -o dist/app.js -v"
   },
   "repository": {
     "type": "git",
@@ -13,5 +18,15 @@
   "bugs": {
     "url": "https://github.com/geowiki-net/geowiki-editor/issues"
   },
-  "homepage": "https://github.com/geowiki-net/geowiki-editor#readme"
+  "homepage": "https://github.com/geowiki-net/geowiki-editor#readme",
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "leaflet-geowiki": "github:geowiki-net/leaflet-geowiki"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "esmify": "^2.1.1",
+    "standard": "^17.1.0",
+    "watchify": "^4.0.0"
+  }
 }
