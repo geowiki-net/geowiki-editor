@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/geowiki-net/geowiki-editor#readme",
   "dependencies": {
+    "async": "^3.2.4",
+    "js-yaml": "^4.1.0",
     "leaflet": "^1.9.4",
     "leaflet-geowiki": "github:geowiki-net/leaflet-geowiki"
   },
