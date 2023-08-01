@@ -1,0 +1,17 @@
+{
+  "name": "geowiki-editor",
+  "version": "0.0.0",
+  "description": "Web-Application which allows editing map data and style for geowiki applications",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geowiki-net/geowiki-editor.git"
+  },
+  "author": "Stephan Bösch-Plepelits <skunk@xover.mud.at>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/geowiki-net/geowiki-editor/issues"
+  },
+  "homepage": "https://github.com/geowiki-net/geowiki-editor#readme"
+}
