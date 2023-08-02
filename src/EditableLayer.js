@@ -1,5 +1,5 @@
 import LeafletGeowiki from 'leaflet-geowiki'
-const yaml = require('js-yaml')
+import yaml from 'js-yaml'
 import DataChooser from './DataChooser'
 
 class EditableLayer {
@@ -74,7 +74,7 @@ class EditableLayer {
     }
 
     // Initialize Geowiki viewer
-    this.layer = new LeafletGeowiki(leafletGeowikiOptions).addTo(map)
+    this.layer = new LeafletGeowiki(leafletGeowikiOptions).addTo(this.map)
   }
 }
 
