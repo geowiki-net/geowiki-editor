@@ -51,6 +51,10 @@ class EditableLayer {
   addTo (map) {
     this.map = map
 
+    this.reload()
+  }
+
+  reload () {
     if (this.layer) {
       this.layer.remove()
     }
