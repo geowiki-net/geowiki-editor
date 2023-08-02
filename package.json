@@ -23,7 +23,8 @@
     "async": "^3.2.4",
     "js-yaml": "^4.1.0",
     "leaflet": "^1.9.4",
-    "leaflet-geowiki": "github:geowiki-net/leaflet-geowiki"
+    "leaflet-geowiki": "github:geowiki-net/leaflet-geowiki",
+    "modulekit-window": "github:plepe/modulekit-window"
   },
   "devDependencies": {
     "browserify": "^17.0.0",
