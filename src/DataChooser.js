@@ -1,4 +1,5 @@
 import Events from 'events'
+import Window from 'modulekit-window'
 
 class DataChooser extends Events {
   constructor (app) {
@@ -14,7 +15,29 @@ class DataChooser extends Events {
       this.dom.appendChild(option)
     })
 
-    this.dom.onchange = () => this.emit('change', this.app.sources[this.dom.value])
+    const optionAdd = document.createElement('option')
+    optionAdd.value = 'add'
+    optionAdd.appendChild(document.createTextNode('Add data source'))
+    this.dom.appendChild(optionAdd)
+
+    this.dom.onchange = () => {
+      if (this.dom.value === 'add') {
+        return this.addDataSource((err, index) => {
+          this.dom.value = index
+          this.emit('change', this.app.sources[this.dom.value])
+        })
+      }
+
+      this.emit('change', this.app.sources[this.dom.value])
+    }
+  }
+
+  addDataSource () {
+    const w = new Window({
+      title: 'Add data source'
+    })
+
+    w.show()
   }
 }
 
