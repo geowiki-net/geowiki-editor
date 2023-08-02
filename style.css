@@ -12,3 +12,6 @@
   resize: vertical;
   box-sizing: border-box;
 }
+.EditableLayer > form > select {
+  width: 100%;
+}

@@ -1,5 +1,6 @@
 import LeafletGeowiki from 'leaflet-geowiki'
 const yaml = require('js-yaml')
+import DataChooser from './DataChooser'
 
 class EditableLayer {
   constructor (app, options) {
@@ -15,6 +16,14 @@ class EditableLayer {
       this.applyStyle(this.domStyle.value)
       return false
     }
+
+    this.dataChooser = new DataChooser(app)
+    this.dataChooser.on('change', (source) => {
+      this.options.source = source
+      this.reload()
+    })
+    this.domData = this.dataChooser.dom
+    this.form.appendChild(this.domData)
 
     this.domStyle = document.createElement('textarea')
     this.domStyle.className = 'style'

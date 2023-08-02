@@ -9,6 +9,10 @@ class App {
       {
         name: 'OpenStreetMap (via overpass-api.de)',
         url: '//overpass-api.de/api/interpreter',
+      },
+      {
+        name: 'data.osm',
+        url: 'data.osm'
       }
     ]
 
