@@ -24,6 +24,13 @@ class App extends Events {
     })
   }
 
+  addSource (def) {
+    def.overpassFrontend = new OverpassFrontend(def.url)
+    this.sources.push(def)
+
+    this.emit('sources-change')
+  }
+
   initMap () {
     // Create Leaflet map object
     this.map = L.map('map').setView([ 47.0835225, 15.4600919 ], 18)

@@ -43,10 +43,62 @@ class DataChooser extends Events {
     this.emit('change', this.app.sources[index])
   }
 
-  addDataSource () {
+  addDataSource (callback) {
     const w = new Window({
       title: 'Add data source'
     })
+
+    const buttonURL = document.createElement('button')
+    buttonURL.appendChild(document.createTextNode('Add URL of an Overpass API server or a .osm or .osm.bz2 file'))
+    w.content.appendChild(buttonURL)
+
+    buttonURL.onclick = () => {
+      w.content.innerHTML = ''
+
+      const form = document.createElement('form')
+
+      form.appendChild(document.createTextNode('Enter URL of Overpass API server or .osm or .osm.bz2 file:'))
+      form.appendChild(document.createElement('br'))
+
+      const inputURL = document.createElement('input')
+      inputURL.name = 'url'
+      form.appendChild(inputURL)
+
+      form.appendChild(document.createElement('br'))
+
+      const inputSubmit = document.createElement('input')
+      inputSubmit.type = 'submit'
+      inputSubmit.value = 'Ok'
+      form.appendChild(inputSubmit)
+
+      w.content.appendChild(form)
+
+      inputSubmit.onclick = () => {
+        global.setTimeout(() => {
+          const def = {
+            name: form.elements.url.value,
+            url: form.elements.url.value
+          }
+
+          this.app.addSource(def)
+          w.close()
+          callback(null, this.app.sources.length - 1)
+        }, 0)
+
+        return false
+      }
+
+      const inputCancel = document.createElement('input')
+      inputCancel.type = 'button'
+      inputCancel.value = 'Cancel'
+      form.appendChild(inputCancel)
+
+      inputCancel.onclick = () => {
+        w.close()
+        callback(null, null)
+        return false
+      }
+    }
 
     w.show()
   }
