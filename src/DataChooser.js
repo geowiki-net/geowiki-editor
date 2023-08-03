@@ -61,6 +61,10 @@ class DataChooser extends Events {
     buttonURL.appendChild(document.createTextNode('Add URL of an Overpass API server or a .osm or .osm.bz2 file'))
     w.content.appendChild(buttonURL)
 
+    const buttonUpload = document.createElement('button')
+    buttonUpload.appendChild(document.createTextNode('Upload .osm or .osm.bz2 file'))
+    w.content.appendChild(buttonUpload)
+
     buttonURL.onclick = () => {
       w.content.innerHTML = ''
 
@@ -92,6 +96,59 @@ class DataChooser extends Events {
           this.app.addSource(def)
           w.close()
           callback(null, this.app.sources.length - 1)
+        }, 0)
+
+        return false
+      }
+
+      const inputCancel = document.createElement('input')
+      inputCancel.type = 'button'
+      inputCancel.value = 'Cancel'
+      form.appendChild(inputCancel)
+
+      inputCancel.onclick = () => {
+        w.close()
+        callback(null, null)
+        return false
+      }
+    }
+
+    buttonUpload.onclick = () => {
+      w.content.innerHTML = ''
+
+      const form = document.createElement('form')
+
+      form.appendChild(document.createTextNode('Upload .osm or .osm.bz2 file:'))
+      form.appendChild(document.createElement('br'))
+
+      const inputFile = document.createElement('input')
+      inputFile.type = 'file'
+      inputFile.name = 'file'
+      form.appendChild(inputFile)
+
+      form.appendChild(document.createElement('br'))
+
+      const inputSubmit = document.createElement('input')
+      inputSubmit.type = 'submit'
+      inputSubmit.value = 'Ok'
+      form.appendChild(inputSubmit)
+
+      w.content.appendChild(form)
+
+      inputSubmit.onclick = () => {
+        global.setTimeout(() => {
+          const reader = new FileReader()
+          reader.onload = (e) => {
+            const def = {
+              name: form.elements.file.value,
+              url: e.target.result
+            }
+
+            this.app.addSource(def)
+            w.close()
+            callback(null, this.app.sources.length - 1)
+          }
+          reader.readAsDataURL(form.elements.file.files[0])
         }, 0)
 
         return false
