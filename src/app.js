@@ -1,10 +1,13 @@
 require('leaflet')
+import Events from 'events'
 import async from 'async'
 import OverpassFrontend from 'overpass-frontend'
 import EditableLayer from './EditableLayer'
 
-class App {
+class App extends Events {
   constructor () {
+    super()
+
     this.sources = [
       {
         name: 'OpenStreetMap (via overpass-api.de)',
