@@ -7,18 +7,8 @@ class DataChooser extends Events {
     this.app = app
     this.dom = document.createElement('select')
 
-    this.app.sources.forEach((source, index) => {
-      const option = document.createElement('option')
-      option.value = index
-      option.appendChild(document.createTextNode(source.name))
-
-      this.dom.appendChild(option)
-    })
-
-    const optionAdd = document.createElement('option')
-    optionAdd.value = 'add'
-    optionAdd.appendChild(document.createTextNode('Add data source'))
-    this.dom.appendChild(optionAdd)
+    this.showSources()
+    this.app.on('sources-change', () => this.showSources())
 
     this.dom.onchange = () => {
       if (this.dom.value === 'add') {
@@ -35,6 +25,25 @@ class DataChooser extends Events {
     }
 
     this.select(0)
+  }
+
+  showSources () {
+    while (this.dom.firstChild) {
+      this.dom.removeChild(this.dom.firstChild)
+    }
+
+    this.app.sources.forEach((source, index) => {
+      const option = document.createElement('option')
+      option.value = index
+      option.appendChild(document.createTextNode(source.name))
+
+      this.dom.appendChild(option)
+    })
+
+    const optionAdd = document.createElement('option')
+    optionAdd.value = 'add'
+    optionAdd.appendChild(document.createTextNode('Add data source'))
+    this.dom.appendChild(optionAdd)
   }
 
   select (index) {
