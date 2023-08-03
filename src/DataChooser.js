@@ -22,14 +22,25 @@ class DataChooser extends Events {
 
     this.dom.onchange = () => {
       if (this.dom.value === 'add') {
+        this.select(this.current)
+
         return this.addDataSource((err, index) => {
-          this.dom.value = index
-          this.emit('change', this.app.sources[this.dom.value])
+          if (index !== null) {
+            this.select(index)
+          }
         })
       }
 
-      this.emit('change', this.app.sources[this.dom.value])
+      this.select(this.dom.value)
     }
+
+    this.select(0)
+  }
+
+  select (index) {
+    this.current = 0
+    this.dom.value = index
+    this.emit('change', this.app.sources[index])
   }
 
   addDataSource () {
