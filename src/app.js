@@ -1,4 +1,3 @@
-require('leaflet')
 import Events from 'events'
 import async from 'async'
 import OverpassFrontend from 'overpass-frontend'

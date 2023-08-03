@@ -15,6 +15,7 @@ class DataChooser extends Events {
         this.select(this.current)
 
         return this.addDataSource((err, index) => {
+          if (err) { return global.alert(err) }
           if (index !== null) {
             this.select(index)
           }
