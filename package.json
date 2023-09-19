@@ -4,7 +4,7 @@
   "description": "Web-Application which allows editing map data and style for geowiki applications",
   "scripts": {
     "build": "browserify -g browserify-css src/app.js -p esmify -o dist/app.js",
-    "build-translations": "build_dist_node",
+    "build-translations": "modulekit-lang-build-dist",
     "prepare": "npm run build && npm run build-translations",
     "lint": "standard --fix src/*.js",
     "watch": "watchify -g browserify-css --debug src/app.js -p esmify -o dist/app.js -v"
