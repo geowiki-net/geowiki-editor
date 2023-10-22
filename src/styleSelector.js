@@ -29,6 +29,7 @@ function initFun (app, callback) {
 
   dom.onchange = () => {
     app.stateApply({ styleFile: dom.value })
+    app.updateLink()
   }
 
   callback()
