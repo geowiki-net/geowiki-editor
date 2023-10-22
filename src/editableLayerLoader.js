@@ -19,5 +19,18 @@ function initFun (app, callback) {
     }
   })
 
+  app.on('style-get-list', (promises) => {
+    promises.push(new Promise((resolve) => {
+      const list = Object.keys(localStorage)
+        .map(id => {
+          const m = id.match(/^style-(.*)$/)
+          return m ? m[1] : null
+        })
+        .filter(id => id)
+
+      resolve(list)
+    }))
+  })
+
   callback()
 }
