@@ -21,7 +21,7 @@ function initFun (app, callback) {
     textarea.value = source
   })
 
-  const dom = document.getElementById('editor')
+  const dom = document.getElementById('editor-style')
 
   const form = document.createElement('form')
   form.className = 'styleEditor'

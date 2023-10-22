@@ -1,17 +1,21 @@
 #map { position: absolute; left: 0; right: 250px; top: 0; bottom: 0; border-right: 1px solid black; box-sizing: border-box; }
 #editor { position: absolute; width: 250px; top: 0; bottom: 0; right: 0; }
 
-.EditableLayer {
+h4 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+#editor-style {
   border: 1px solid black;
   border-radius: 0.25em;
   padding: 0.25em;
 }
-.EditableLayer > form > textarea.style {
+#editor-style > form > textarea {
   width: 100%;
-  height: 5em;
+  height: 7em;
   resize: vertical;
   box-sizing: border-box;
 }
-.EditableLayer > form > select {
+#editor-style > form > select {
   width: 100%;
 }
