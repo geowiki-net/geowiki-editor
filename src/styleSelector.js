@@ -10,6 +10,25 @@ function initFun (app, callback) {
   const dom = document.createElement('select')
   parentNode.appendChild(dom)
 
+  app.on('init', () => {
+    const promises = []
+    app.emit('style-get-list', promises)
+    promises.forEach(p => p.then(list => {
+      list.forEach(s => {
+        const hasStyleFile = !!Array.from(dom.children)
+          .filter(option => option.value === s)
+          .length
+
+        if (hasStyleFile) { return }
+
+        const option = document.createElement('option')
+        option.value = s
+        option.appendChild(document.createTextNode(s))
+        dom.appendChild(option)
+      })
+    }))
+  })
+
   app.on('state-apply', state => {
     if (state.styleFile) {
       const hasStyleFile = !!Array.from(dom.children)
