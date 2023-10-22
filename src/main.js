@@ -4,6 +4,7 @@ import 'geowiki-viewer/src/lang'
 import 'geowiki-viewer/src/map'
 import 'geowiki-viewer/src/layer'
 import 'geowiki-viewer/src/config'
+import './editableLayerLoader'
 import App from './App'
 
 window.onload = function () {
