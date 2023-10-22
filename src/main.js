@@ -7,6 +7,7 @@ import 'geowiki-viewer/src/config'
 import './styleSelector'
 import './styleEditor'
 import './editableLayerLoader'
+import './listDataDirectory'
 import App from './App'
 
 window.onload = function () {
