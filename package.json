@@ -27,6 +27,7 @@
     "js-yaml": "^4.1.0",
     "leaflet": "^1.9.4",
     "leaflet-geowiki": "github:geowiki-net/leaflet-geowiki",
+    "md5": "^2.3.0",
     "modulekit-window": "github:plepe/modulekit-window",
     "sheet-router": "^4.2.3"
   },
