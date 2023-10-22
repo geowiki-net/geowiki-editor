@@ -11,6 +11,7 @@ App.addExtension({
 })
 
 let textarea
+let downloadLink
 
 function initFun (app, callback) {
   app.on('style-load', source => {
@@ -19,6 +20,7 @@ function initFun (app, callback) {
     }
 
     textarea.value = source
+    updateDownloadLink()
   })
 
   const dom = document.getElementById('editor-style')
@@ -46,7 +48,19 @@ function initFun (app, callback) {
   submit.value = 'Apply'
   form.appendChild(submit)
 
+  downloadLink = document.createElement('a')
+  downloadLink.innerHTML = 'Download'
+  form.appendChild(downloadLink)
+  updateDownloadLink()
+  textarea.onchange = () => updateDownloadLink()
+
   dom.appendChild(form)
 
   callback()
+}
+
+function updateDownloadLink () {
+  const file = new Blob([textarea.value], { type: 'application/yaml' })
+  downloadLink.href = URL.createObjectURL(file)
+  downloadLink.download = md5(textarea.value) + '.yaml'
 }
