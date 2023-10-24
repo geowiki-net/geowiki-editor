@@ -24,6 +24,19 @@ function initFun (app, callback) {
     }))
   })
 
+  app.on('data-get-list', (promises) => {
+    promises.push(new Promise((resolve, reject) => {
+      loadDataDirectory(app.config.dataDirectory,
+        (err, files) => {
+          if (err) { reject(err) }
+
+          const list = files.filter(file => file.id.match(/\.(osm|osm\.bz2)$/))
+          resolve(list)
+        }
+      )
+    }))
+  })
+
   callback()
 }
 
