@@ -13,38 +13,49 @@ function initFun (app, callback) {
 
   app.on('style-get-list', (promises) => {
     promises.push(new Promise((resolve, reject) => {
-      let mode = 'http-server'
+      loadDataDirectory(app.config.dataDirectory,
+        (err, files) => {
+          if (err) { reject(err) }
 
-      fetch(app.config.dataDirectory + '?F=2')
-        .then(req => {
-          const server = req.headers.get('server')
-          if (server) {
-            if (server.match(/^Apache\//)) {
-              mode = 'apache'
-            }
-          }
-
-          return req.text()
-        })
-        .then(text => {
-          const dom = new JSDOM(text)
-
-          let qry
-          if (mode === 'http-server') {
-            qry = 'table tr td.display-name'
-          } else if (mode === 'apache') {
-            qry = 'table tr td:nth-child(2)'
-          }
-
-          let list = dom.window.document.querySelectorAll(qry)
-          list = Array.from(list)
-            .map(d => d.textContent)
-            .filter(name => name.match(/\.yaml$/))
-
+          const list = files.filter(name => name.match(/\.yaml$/))
           resolve(list)
-        })
+        }
+      )
     }))
   })
 
   callback()
+}
+
+function loadDataDirectory (path, callback) {
+  let mode = 'http-server'
+
+  fetch(path + '?F=2')
+    .then(req => {
+      const server = req.headers.get('server')
+      if (server) {
+        if (server.match(/^Apache\//)) {
+          mode = 'apache'
+        }
+      }
+
+      return req.text()
+    })
+    .then(text => {
+      const dom = new JSDOM(text)
+
+      let qry
+      if (mode === 'http-server') {
+        qry = 'table tr td.display-name'
+      } else if (mode === 'apache') {
+        qry = 'table tr td:nth-child(2)'
+      }
+
+      let list = dom.window.document.querySelectorAll(qry)
+      list = Array.from(list)
+        .map(d => d.textContent)
+        .filter(name => name.substr(0, 1) !== '.')
+
+      callback(null, list)
+    })
 }
