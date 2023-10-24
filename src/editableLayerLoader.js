@@ -24,9 +24,9 @@ function initFun (app, callback) {
       const list = Object.keys(localStorage)
         .map(id => {
           const m = id.match(/^style-(.*)$/)
-          return m ? m[1] : null
+          return m ? { id: m[1], name: m[1] } : null
         })
-        .filter(id => id)
+        .filter(file => file)
 
       resolve(list)
     }))

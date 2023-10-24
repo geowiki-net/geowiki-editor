@@ -14,16 +14,16 @@ function initFun (app, callback) {
     const promises = []
     app.emit('style-get-list', promises)
     promises.forEach(p => p.then(list => {
-      list.forEach(s => {
+      list.forEach(file => {
         const hasStyleFile = !!Array.from(dom.children)
-          .filter(option => option.value === s)
+          .filter(option => option.value === file.id)
           .length
 
         if (hasStyleFile) { return }
 
         const option = document.createElement('option')
-        option.value = s
-        option.appendChild(document.createTextNode(s))
+        option.value = file.id
+        option.appendChild(document.createTextNode(file.name))
         dom.appendChild(option)
       })
     }))

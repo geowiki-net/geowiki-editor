@@ -17,7 +17,7 @@ function initFun (app, callback) {
         (err, files) => {
           if (err) { reject(err) }
 
-          const list = files.filter(name => name.match(/\.yaml$/))
+          const list = files.filter(file => file.id.match(/\.yaml$/))
           resolve(list)
         }
       )
@@ -53,8 +53,13 @@ function loadDataDirectory (path, callback) {
 
       let list = dom.window.document.querySelectorAll(qry)
       list = Array.from(list)
-        .map(d => d.textContent)
-        .filter(name => name.substr(0, 1) !== '.')
+        .map(d => {
+          return {
+            id: d.textContent,
+            name: d.textContent
+          }
+        })
+        .filter(file => file.id.substr(0, 1) !== '.')
 
       callback(null, list)
     })
