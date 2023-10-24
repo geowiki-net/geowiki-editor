@@ -1,6 +1,6 @@
 import App from './App'
 App.addExtension({
-  id: 'stytleSelector',
+  id: 'styleSelector',
   initFun
 })
 
